@@ -1,0 +1,31 @@
+# Saved input for neutronics simulator.
+
+# GUI parameters# window 1920 1080
+fps 60
+language french
+keff_panel_is_visible false
+source_panel_is_visible false
+geometry_panel_is_visible false
+chemistry_panel_is_visible true
+
+# Simulation parameters :
+continuous_simulation true
+reflexions_activated false
+r_neutron 0.200000
+neutron_speed_magnitude 3.000000
+
+# Sources :
+nb_source 200
+type_source fissile
+x_source 10
+y_source 12.5
+renormalization_delay 400
+add_source_delay 5
+
+# Materials :
+material reflector_mat blue 9.48e+20 2.000000 749.000000 98.709999 0.000000
+material fuel_mat green 9.48e+20 2.000000 15.000000 98.709999 263.000000
+
+# Volumes :
+disk reflector 7.200000 12.488750 7.918125 reflector_mat 1
+disk fuel 2.800000 12.488751 7.837656 fuel_mat 2

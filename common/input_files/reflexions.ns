@@ -1,0 +1,33 @@
+language french
+continuous_simulation true
+
+source_panel_is_visible false
+geometry_panel_is_visible true
+chemistry_panel_is_visible false
+
+
+reflexions_activated false
+# window 800 600
+fps 60
+r_neutron 0.2
+neutron_speed_magnitude 3
+
+# x_rod, y_rod, width_rod, height_rod, delta_rod
+rod 5 10 2 7 0.3
+nb_source 150
+type_source fissile
+x_source 13
+y_source 10
+renormalization_delay 400
+add_source_delay 5
+
+material eau blue 9.48e20 2 900.2 0 0
+material comb purple 9.48e20 2 15.2 98.71 325.1
+
+
+disk mondisk 2.9 13 9 comb 1
+
+rectangle mur1 4 14 25 20 eau 2
+rectangle mur2 4 14 30 20 eau 3 
+rectangle mur3 14 4 25 18 eau 4 
+rectangle mur4 14 4 25 23 eau 5

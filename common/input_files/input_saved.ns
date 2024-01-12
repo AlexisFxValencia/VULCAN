@@ -1,0 +1,33 @@
+# Saved input for neutronics simulator.
+
+# GUI parameters# window 1920 1080
+fps 60
+language french
+source_panel_is_visible true
+geometry_panel_is_visible true
+chemistry_panel_is_visible true
+
+# Simulation parameters :
+continuous_simulation true
+reflexions_activated false
+r_neutron 0.200000
+neutron_speed_magnitude 3.000000
+
+# Sources :
+nb_source 40
+x_source 999
+y_source 999
+renormalization_delay 500
+add_source_delay 5
+
+# Materials :
+material comb_rectangle_1 random 9.48e+20 2 100.000000 98.709999 375.000000
+material reflector_rectangle_2 random 9.48e+20 2 1000.000000 1.000000 1.000000
+material comb_rectangle_3 random 9.48e+20 2 100.000000 98.709999 375.000000
+material reflector_rectangle_4 random 9.48e+20 2 2500.000000 1.000000 1.000000
+
+# Volumes :
+rectangle rectangle_1 2.600000 5.600000 4.200000 6.500000 comb_rectangle_1
+rectangle rectangle_2 2.600000 3.100000 4.500000 10.683907 reflector_rectangle_2
+rectangle rectangle_3 2.600000 5.600000 21.000000 6.500000 comb_rectangle_3
+rectangle rectangle_4 2.600000 3.100000 21.316093 10.700000 reflector_rectangle_4

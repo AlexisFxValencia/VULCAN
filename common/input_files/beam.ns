@@ -1,0 +1,44 @@
+# Saved input for neutronics simulator.
+
+# GUI parameters# window 1680 1050
+fps 60
+language french
+keff_panel_is_visible false
+source_panel_is_visible false
+geometry_panel_is_visible true
+chemistry_panel_is_visible false
+
+# Simulation parameters :
+continuous_simulation true
+reflexions_activated false
+r_neutron 0.200000
+neutron_speed_magnitude 3.000000
+
+# Sources :
+nb_source 100
+type_source fissile
+x_source 13
+y_source 10
+renormalization_delay 400
+add_source_delay 5
+
+# Materials :
+material comb_mondisk random 9.48e+20 2.000000 15.200000 98.709999 625.100006
+material eau random 9.48e+20 2.000000 900.200012 0.000000 0.000000
+material bore green 2.73e21 1 200.0 400.0 0.0
+
+
+# Volumes :
+disk mondisk 1.400000 13.197083 8.887381 comb_mondisk 1
+rectangle mur1 9.400000 14.000000 4.672262 7.893452 eau 2
+rectangle mur2 9.700000 14.000000 21.638037 8.738096 eau 3
+rectangle mur3 14.000000 4.000000 12.865298 1.979941 eau 4
+rectangle mur4 9.300000 6.400000 7.348392 15.090949 eau 5
+rectangle mur5 9.300000 6.400000 19.483093 15.372500 eau 6
+
+rectangle absorber_1 1.400000 7.700000 8.088234 7.941176 bore 7
+rectangle absorber_2 1.400000 7.700000 17.735292 8.117647 bore 8
+
+
+rectangle absorber_3 1.800000 5.100000 15.997189 14.951094 bore 9
+rectangle absorber_3 1.800000 5.100000 10.9 14.651094 bore 10

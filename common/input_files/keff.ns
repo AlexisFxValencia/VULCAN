@@ -1,0 +1,36 @@
+# Saved input for neutronics simulator.
+
+# GUI parameters# window 1920 1080
+fps 60
+language french
+source_panel_is_visible false
+geometry_panel_is_visible false
+chemistry_panel_is_visible false
+keff_panel_is_visible true
+
+# Simulation parameters :
+continuous_simulation true
+reflexions_activated false
+r_neutron 0.200000
+neutron_speed_magnitude 3.000000
+# Sources :
+nb_source 140
+type_source uniform
+x_source 10
+y_source 10
+renormalization_delay 400
+add_source_delay 5
+
+# Materials :
+material comb random 9.48e+20 2 15.120000 98.709999 585.099976
+
+
+# Volumes :
+disk disk_1 1.200000 17.944532 9.511406 comb 1
+disk disk_2 1.200000 21.452969 14.677500 comb 2
+disk disk_3 1.200000 21.372501 3.798125 comb 3 
+disk disk_4 1.200000 3.894687 3.347500 comb 4
+disk disk_5 1.200000 9.173439 11.008124 comb 5
+disk disk_6 1.200000 12.617498 4.892500 comb 6
+disk disk_7 1.200000 12.215157 15.948906 comb 7
+disk disk_8 1.200000 2.607187 9.849376 comb 8

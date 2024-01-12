@@ -1,0 +1,28 @@
+language french
+continuous_simulation true
+
+source_panel_is_visible false
+geometry_panel_is_visible true
+chemistry_panel_is_visible false
+keff_panel_is_visible false
+
+reflexions_activated false
+# window 800 600
+fps 60
+r_neutron 0.2
+neutron_speed_magnitude 3
+
+# x_rod, y_rod, width_rod, height_rod, delta_rod
+rod 5 10 2 7 0.3
+nb_source 30
+type_source fissile
+x_source 13
+y_source 8
+renormalization_delay 400
+add_source_delay 5
+
+material comb purple 9.48e20 2 415.2 50 185.1
+
+
+disk mondisk 2.100000 13.068750 7.650312 comb 1
+

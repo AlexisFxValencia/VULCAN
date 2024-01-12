@@ -1,0 +1,35 @@
+language french
+continuous_simulation false
+
+
+	
+reflexions_activated true
+# window 800 600
+fps 60
+
+nb_source 5
+r_neutron 0.3
+neutron_speed_magnitude 15
+
+nb_nuclide 0
+r_nuclide 0.5
+mass_nuclide 200
+nuclides_distribution square
+nuclide_refresh_delay 10.0
+neutron_refresh_delay 0.4
+
+nb_hydrogen 100
+r_hydrogen 0.3
+mass_hydrogen 1
+hydrogen_speed_magnitude 0.0
+
+nb_spent_nuclide 0
+
+control_rod_exists false
+# x_rod, y_rod, width_rod, height_rod, delta_rod
+rod 5 10 2 7 0.3
+
+
+
+
+

@@ -1,0 +1,25 @@
+language french
+continuous_simulation true
+
+source_panel_is_visible false
+geometry_panel_is_visible true
+chemistry_panel_is_visible false
+
+reflexions_activated false
+# window 800 600
+fps 60
+r_neutron 0.2
+neutron_speed_magnitude 3
+
+
+nb_source 30
+type_source fissile
+x_source 13
+y_source 8
+renormalization_delay 400
+add_source_delay 5
+
+material comb green 9.48e20 2 15.2 98.71 585.1
+
+
+rectangle monrectangle 24.0 1.5 14 8.473281 comb 1

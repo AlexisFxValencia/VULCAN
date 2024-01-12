@@ -1,0 +1,21 @@
+ActiveButton {
+  //BackgroundColor = rgb(255, 87, 51);
+  BackgroundColor = rgb(222, 125, 105);
+}
+PassiveButton {
+  BackgroundColor = white;
+
+}
+
+ManualButton {
+  BackgroundColor = rgb(142, 222, 105); //green
+}
+AutoButton {
+  BackgroundColor = rgb(222, 125, 105); //red
+
+}
+
+LoadedEditBox {
+  BackgroundColor = rgb(142, 222, 105);
+
+}
