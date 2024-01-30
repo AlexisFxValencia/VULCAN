@@ -68,9 +68,9 @@ void NeutronSet::add_source_neutrons(DataManager& dm) {
         else if (dm.type_source == "fissile") {
             for (auto index : fissiles_list) {
                 if (dm.volu_array[index].type == "rectangle") {
-                    float alea_1 = ((float)rand() / (RAND_MAX + 1));
+                    float alea_1 = (float)rand() / RAND_MAX;
                     x = alea_1 * dm.volu_array[index].param1 + (dm.volu_array[index].x - (dm.volu_array[index].param1 / 2));
-                    float alea_2 = ((float)rand() / (RAND_MAX + 1));
+                    float alea_2 = (float)rand() / RAND_MAX;
                     y = alea_2 * dm.volu_array[index].param2 + (dm.volu_array[index].y - (dm.volu_array[index].param2 / 2));
                 }
                 else if (dm.volu_array[index].type == "disk") {
@@ -193,7 +193,7 @@ void NeutronSet::compute_one_reaction(Volume volume, Particle& neutron, int i, D
         float proba_c = volume.material.sigma_c_macro / volume.material.sigma_total_macro;
         float proba_f = volume.material.sigma_f_macro / volume.material.sigma_total_macro;
 
-        float alea = ((float)rand() / (RAND_MAX));
+        float alea = (float)rand() / RAND_MAX;
         if (alea < proba_s) {
             scatter(i, volume.material, dm);
         }
@@ -265,7 +265,7 @@ int NeutronSet::compute_nu(Material& material) {
     int nu_bar_floor = floor(nu_bar);
     int nu_bar_ceil = ceil(nu_bar);
 
-    float alea = ((float)rand() / (RAND_MAX));
+    float alea = (float)rand() / RAND_MAX;
     if (alea < nu_bar - nu_bar_floor) {
         return nu_bar_floor;
     }
@@ -301,7 +301,7 @@ int NeutronSet::get_nb_alive_neutrons() {
 
 
 float NeutronSet::sort_free_path(Material& material) {
-    float alea = ((float)rand() / (RAND_MAX));
+    float alea = (float)rand() / RAND_MAX;
     float sigma = material.sigma_total_macro;
     float p_x = alea * sigma;
     //p(x) = sigma * exp( - sigma * x)
@@ -324,7 +324,7 @@ void NeutronSet::check_delayed_neutrons_activation(DataManager& dm) {
 
 
 void NeutronSet::choose_if_delayed_neutron(DataManager& dm, Particle& neutron) {
-    float alea_delayed_neutron = ((float)rand() / (RAND_MAX));
+    float alea_delayed_neutron = (float)rand() / RAND_MAX;
     if (alea_delayed_neutron < dm.delayed_neutrons_proportion) {
         neutron.is_active = false;
         neutron.clock_reactions.restart();

@@ -99,11 +99,11 @@ void Particle::set_last_position() {
 
 
 void Particle::set_random_position() {
-    float alea_1 = ((float)rand()/(RAND_MAX + 1));
+    float alea_1 = (float)rand()/RAND_MAX;
     x = alea_1 * (x_max - x_min) + x_min;
     this->x_old = x;
 
-    float alea_2 = ((float)rand() / (RAND_MAX + 1));
+    float alea_2 = (float)rand() / RAND_MAX;
     y = alea_2 * (y_max - y_min) + y_min;
     this->y_old = y;
 }
