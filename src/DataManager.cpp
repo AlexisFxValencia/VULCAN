@@ -10,7 +10,7 @@ DataManager::DataManager() {
     x_window = mode.width;
     y_window = mode.height;
     //cout << "Screen resolution :" << "\t" << mode.width << "x" << mode.height << " \t " << mode.bitsPerPixel << " bpp" << endl;
-    x_gui_panel = 400;    
+    x_gui_panel = 0.25 * x_window;//400;    
     x_canvas = x_window - x_gui_panel;
     y_canvas = y_window;
     ppcm = get_pixels_per_cm();
