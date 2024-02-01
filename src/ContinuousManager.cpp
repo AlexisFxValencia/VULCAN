@@ -410,6 +410,10 @@ void ContinuousManager::continuous_main(DataManager& dm) {
             if (dm.keff_panel_is_visible) {
                 gui_creator.gui_keff.update_keff(dm, neutron_set, gui_creator.gui);
                 if ((neutron_set.nb_captured_neutrons + neutron_set.nb_fissioned_neutrons + neutron_set.nb_fled_neutrons) >= dm.nb_source) {
+                    neutron_set.batch_keff_vector.push_back(neutron_set.keff_estimator_coll_fiss);
+                    neutron_set.compute_averaged_keff();
+                    neutron_set.compute_sigma();
+                    
                     gui_creator.gui_keff.update_all(dm, neutron_set, gui_creator.gui);
                     cout << " keff_estimator_coll_tot = " << neutron_set.keff_estimator_coll_tot << endl;
                     write_keff(myfile);
