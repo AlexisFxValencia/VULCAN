@@ -16,9 +16,9 @@ NeutronSet::NeutronSet(DataManager& dm) {
     nb_fled_neutrons = 0;
     nb_captured_neutrons = 0;
     keff_estimator_coll_fiss = 0;
+    keff_estimator_coll_tot = 0;
 
     update_wall_positions(dm);
-    //keff = 0;
     averaged_keff = 0;
     sigma = 0.0;
     counter = 0;
@@ -195,6 +195,10 @@ void NeutronSet::compute_one_reaction(Volume volume, Particle& neutron, int i, D
         float proba_s = volume.material.sigma_s_macro / volume.material.sigma_total_macro;
         float proba_c = volume.material.sigma_c_macro / volume.material.sigma_total_macro;
         float proba_f = volume.material.sigma_f_macro / volume.material.sigma_total_macro;
+
+        if (neutron.is_source){
+            keff_estimator_coll_tot += volume.material.nu_bar*proba_f/dm.nb_source; 
+        }
 
         float alea = (float)rand() / RAND_MAX;
         if (alea < proba_s) {
@@ -398,6 +402,8 @@ void NeutronSet::reset_keff_counters() {
     nb_fissioned_neutrons = 0;
     nb_fled_neutrons = 0;
     nb_captured_neutrons = 0;
+    
     keff_estimator_coll_fiss = 0;
+    keff_estimator_coll_tot = 0;
 
 }

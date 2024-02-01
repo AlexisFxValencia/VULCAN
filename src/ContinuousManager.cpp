@@ -401,20 +401,17 @@ void ContinuousManager::continuous_main(DataManager& dm) {
             }
 
             int time = static_cast<int>(clock.getElapsedTime().asSeconds() * 20);
-            //int renormalization_delay = dm.renormalization_delay * 20; // a traiter car pose pb avec le nouveau mode
-            //neutron_set.renormalize(dm, dm.nb_source, true, time, renormalization_delay);
 
             int source_delay = dm.add_source_delay * 20;
             generate_sources(dm, time, source_delay, neutron_set);
-          
-
-
-            //neutron_set.compute_keff(dm);
             gui_creator.gui_minimal.update_nb_neutrons(dm, neutron_set, gui_creator.gui);
+
+
             if (dm.keff_panel_is_visible) {
                 gui_creator.gui_keff.update_keff(dm, neutron_set, gui_creator.gui);
                 if ((neutron_set.nb_captured_neutrons + neutron_set.nb_fissioned_neutrons + neutron_set.nb_fled_neutrons) >= dm.nb_source) {
                     gui_creator.gui_keff.update_all(dm, neutron_set, gui_creator.gui);
+                    cout << " keff_estimator_coll_tot = " << neutron_set.keff_estimator_coll_tot << endl;
                     write_keff(myfile);
                     neutron_set.reset_keff_counters();
                     if (gui_creator.gui_keff.automatic_computed_keff) {
@@ -429,8 +426,7 @@ void ContinuousManager::continuous_main(DataManager& dm) {
             
 
                        
-        }
-        else {
+        } else {
             neutron_set.restart_clocks();            
         }
         

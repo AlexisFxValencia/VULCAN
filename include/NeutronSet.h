@@ -30,12 +30,13 @@ public:
     int nb_neutrons_old;
     float previous_time;
     float ppcm;
-    //float keff;
     float averaged_keff;
     float sigma; 
     std::vector<float> batch_keff_vector;
 
     float keff_estimator_coll_fiss;
+    float keff_estimator_coll_tot;
+
     int nb_fissioned_neutrons;
     int nb_fled_neutrons;
     int nb_captured_neutrons;
@@ -81,7 +82,6 @@ public:
 
     void renormalize(DataManager& dm, int nb_source, bool activated, int elapsed_seconds, int renormalization_delay);    
     void generate_new_batch(DataManager& dm);
-    void compute_keff(DataManager& dm);
     void reset_keff_counters();
     void compute_averaged_keff();
     void compute_sigma();
