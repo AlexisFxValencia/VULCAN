@@ -9,7 +9,6 @@ GUIKeff::GUIKeff() {
 GUIKeff::GUIKeff(DataManager& dm) {
     y_keff_panel = dm.y_keff_panel;
     x_widget = 0.05 * dm.button_width;
-	automatic_computed_keff = false;
     text_size_mini = 15;
 
     height = 7 * dm.dy;
@@ -57,7 +56,7 @@ void GUIKeff::reset_panel(DataManager& dm, tgui::GuiSFML& gui) {
     tgui::Theme gui_theme{ "themes/GUITheme.txt" };
     gui.get<tgui::Label>("keff_label")->setText(dm.keff_label_text + "0");
 
-    if (automatic_computed_keff) {
+    if (dm.automatic_computed_keff) {
         gui.get<tgui::Button>("keff_automatic_button")->setRenderer(gui_theme.getRenderer("ActiveButton"));
     }
     else {
@@ -124,16 +123,24 @@ void GUIKeff::create_automatic_keff_button(DataManager& dm, NeutronSet& neutron_
     auto keff_automatic_button = tgui::Button::create(dm.keff_automatic_button_text);
     keff_automatic_button->setSize({ dm.button_width, dm.button_height });
     keff_automatic_button->setPosition({ x_widget, y_keff_automatic_button });
+
+    if (dm.automatic_computed_keff) {
+        tgui::Theme gui_theme{ "themes/GUITheme.txt" };
+        keff_automatic_button->setRenderer(gui_theme.getRenderer("AutoButton"));
+    }
+    else {
+        tgui::Theme gui_theme{ "themes/GUITheme.txt" };
+        keff_automatic_button->setRenderer(gui_theme.getRenderer("PassiveButton"));
+    }
+
     keff_automatic_button->onPress([&]() {
-        if (automatic_computed_keff) {
-            automatic_computed_keff = false;
-            //gui.get<tgui::Button>("keff_automatic_button")->setText(manual_source_text);
+        if (dm.automatic_computed_keff) {
+            dm.automatic_computed_keff = false;
             tgui::Theme gui_theme{ "themes/GUITheme.txt" };
             gui.get<tgui::Button>("keff_automatic_button")->setRenderer(gui_theme.getRenderer("PassiveButton"));
         }
         else {
-            automatic_computed_keff = true;
-            //gui.get<tgui::Button>("keff_automatic_button")->setText(automatic_source_text);
+            dm.automatic_computed_keff = true;
             tgui::Theme gui_theme{ "themes/GUITheme.txt" };
             gui.get<tgui::Button>("keff_automatic_button")->setRenderer(gui_theme.getRenderer("AutoButton"));
         }

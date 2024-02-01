@@ -10,7 +10,6 @@ class GUIKeff
 		int y_keff_panel;
 		int x_widget;	
 		int text_size_mini;
-		bool automatic_computed_keff;
 
 		int height;
 

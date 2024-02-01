@@ -239,7 +239,6 @@ void GUICreator::create_simulation_menu(DataManager& dm, NeutronSet& neutron_set
         dm.display_legend = true;
         gui_minimal.simulationPaused = false;
         dm.automatic_generated_sources = false;
-        gui_keff.automatic_computed_keff = false;
         reset_input(dm, neutron_set, control_rod, control_rod_shape, present_input_file);
     });
 
@@ -421,7 +420,7 @@ void GUICreator::create_reset_button(DataManager& dm, NeutronSet& neutron_set, C
         dm.display_legend = true;
         gui_minimal.simulationPaused = false;
         dm.automatic_generated_sources = false;
-        gui_keff.automatic_computed_keff = false;
+        dm.automatic_computed_keff = false;
         
         
         reset_input(dm, neutron_set, control_rod, control_rod_shape, present_input_file);
@@ -472,6 +471,7 @@ void GUICreator::reset_gui(DataManager& dm) {
     gui_source.reset_panel(dm, gui);
     gui_chemistry.reset_panel(dm, gui);
     gui_geometry.reset_panel(dm, gui);
+    
 }
 
 

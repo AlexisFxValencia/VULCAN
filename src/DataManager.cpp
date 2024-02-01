@@ -98,6 +98,7 @@ DataManager::DataManager() {
     delta_rod = 0.3;
 
     automatic_generated_sources = false;
+    automatic_computed_keff = false;
 
     allow_neutron_creation = true;
 }
@@ -326,6 +327,7 @@ void DataManager::parse_line(vector<string> line_array) {
         parse_neutron_speed(line_array);
         parse_rod(line_array);
         parse_source(line_array);
+        parse_keff(line_array);
         parse_renormalization_delay(line_array);
         parse_add_source_delay(line_array);
         parse_materials(line_array);
@@ -563,6 +565,22 @@ void DataManager::parse_source(vector<string> line_array) {
     }
 
 }
+
+
+void DataManager::parse_keff(vector<string> line_array){
+    int index = getIndex(line_array, "automatic_computed_keff");
+    
+    if (index != -1) {
+        if (line_array[index + 1] == "true") {
+            automatic_computed_keff = true;
+        }
+        else if (line_array[index + 1] == "false") {
+            automatic_computed_keff = false;
+        }
+    }
+}
+
+
 
 void DataManager::parse_renormalization_delay(vector<string> line_array) {
     int index = getIndex(line_array, "renormalization_delay");

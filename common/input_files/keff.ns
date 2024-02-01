@@ -20,6 +20,7 @@ x_source 10
 y_source 10
 renormalization_delay 400
 add_source_delay 5
+automatic_computed_keff true
 
 # Materials :
 material comb random 9.48e+20 2 15.120000 98.709999 585.099976

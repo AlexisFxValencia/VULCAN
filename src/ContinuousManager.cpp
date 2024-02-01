@@ -418,7 +418,7 @@ void ContinuousManager::continuous_main(DataManager& dm) {
                     cout << " keff_estimator_coll_tot = " << neutron_set.keff_estimator_coll_tot << endl;
                     write_keff(myfile);
                     neutron_set.reset_keff_counters();
-                    if (gui_creator.gui_keff.automatic_computed_keff) {
+                    if (dm.automatic_computed_keff) {
                         neutron_set.generate_new_batch(dm);
                     }
                 }

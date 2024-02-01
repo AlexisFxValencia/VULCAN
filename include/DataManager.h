@@ -32,6 +32,7 @@ public:
 
     bool automatic_generated_sources;
 
+    bool automatic_computed_keff;
     bool allow_neutron_creation;
      
     
@@ -190,6 +191,7 @@ public:
 
     void parse_rod(vector<string> line_array);
     void parse_source(vector<string> line_array);
+    void parse_keff(vector<string> line_array);
     void parse_renormalization_delay(vector<string> line_array);    
     void parse_add_source_delay(vector<string> line_array);
     void parse_materials(vector<string> line_array);
