@@ -52,7 +52,7 @@ public:
     void continuous_main(DataManager& dm);
 
     //void pause_max_neutrons(DataManager& dm, NeutronSet& neutron_set, GUICreator& gui_creator);
-    void generate_sources(DataManager& dm, int time, int delay, NeutronSet& neutron_set, GUICreator& gui_creator);
+    void generate_sources(DataManager& dm, int time, int delay, NeutronSet& neutron_set);
     void write_keff(ofstream& myfile);
 
 };

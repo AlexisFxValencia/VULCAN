@@ -434,8 +434,9 @@ void GUICreator::reset_input(DataManager& dm, NeutronSet& neutron_set, ControlRo
     //dm.control_rod_exists = false;
     dm.clear();
     neutron_set.batch_keff_vector.clear(); 
-    neutron_set.keff = 0.0;
+    neutron_set.keff_estimator_coll_fiss = 0.0;
     neutron_set.averaged_keff = 0.0;
+    neutron_set.sigma = 0.0;
     neutron_set.reset_keff_counters();
     
     dm.read(input_name);

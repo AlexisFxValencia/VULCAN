@@ -15,10 +15,10 @@ NeutronSet::NeutronSet(DataManager& dm) {
     nb_fissioned_neutrons = 0;
     nb_fled_neutrons = 0;
     nb_captured_neutrons = 0;
-    nb_fission = 0;
+    keff_estimator_coll_fiss = 0;
 
     update_wall_positions(dm);
-    keff = 0;
+    //keff = 0;
     averaged_keff = 0;
     sigma = 0.0;
     counter = 0;
@@ -26,6 +26,7 @@ NeutronSet::NeutronSet(DataManager& dm) {
     nb_alive_neutrons = 0;
 
     fill_neutrons_vector(dm);
+
 }
 
 NeutronSet::NeutronSet() {
@@ -150,9 +151,11 @@ void NeutronSet::remove_fled_neutrons(int i) {
     if (x > x_max + r_neutron || x < x_min - r_neutron || y > y_max + r_neutron || y < y_min - r_neutron) {
         if (neutrons_array[i].is_source) {
             nb_fled_neutrons++;
-            neutrons_array[i].is_source = false;
         }
         neutrons_array[i].is_alive = false;
+
+        neutrons_array[i].last_reaction = fled;
+
         nb_alive_neutrons--;
     }
 }
@@ -201,21 +204,6 @@ void NeutronSet::compute_one_reaction(Volume volume, Particle& neutron, int i, D
             capture(i);
         }
         else if (proba_s + proba_c < alea && alea < 1.0) {
-            /*
-            //cout << "fission" << endl;
-            if (fissioned_neutrons_vector.size() < dm.nb_source) {
-                Particle fissioned_neutron = Particle(neutron.x, neutron.y, 0, 0, r_neutron, mass_neutron, x_min, x_max, y_min, y_max);
-                fissioned_neutrons_vector.push_back(fissioned_neutron);
-            }
-            else {
-                fissioned_neutrons_vector[counter].setX(neutron.x);
-                fissioned_neutrons_vector[counter].setY(neutron.y);
-                counter++;
-                if (dm.nb_source != 0) {
-                    counter = counter % dm.nb_source;
-                }
-            }
-            */
             fission(i, volume.material, dm);
         }
     }
@@ -230,18 +218,18 @@ void NeutronSet::scatter(int i, Material material, DataManager& dm) {
 void NeutronSet::capture(int i) {
     if (neutrons_array[i].is_source) {
         nb_captured_neutrons++;
-        neutrons_array[i].is_source = false;
     }
     neutrons_array[i].is_alive = false;
     nb_alive_neutrons--;
+    neutrons_array[i].last_reaction = captured;
 }
 
 void NeutronSet::fission(int i, Material& material, DataManager& dm) {
     if (neutrons_array[i].is_source) {
         nb_fissioned_neutrons++;
-        nb_fission = nb_fission + material.nu_bar; //a corriger sur le nu_bar qui n'est pas tjrs fixe
-        neutrons_array[i].is_source = false;
+        keff_estimator_coll_fiss += material.nu_bar/dm.nb_source; //a corriger sur le nu_bar qui n'est pas tjrs fixe
     }
+    neutrons_array[i].last_reaction = fissioned;
 
     neutrons_array[i].set_random_velocity(dm.neutron_speed_magnitude);
     neutrons_array[i].free_path = sort_free_path(material);
@@ -257,6 +245,8 @@ void NeutronSet::fission(int i, Material& material, DataManager& dm) {
                 neutrons_array[k].free_path = sort_free_path(material);
             }            
         }
+    } else{
+        neutrons_array[i].is_alive = false;
     }
 }
 
@@ -352,49 +342,28 @@ void NeutronSet::update_wall_positions(DataManager& dm) {
 }
 
 
-void NeutronSet::renormalize(DataManager& dm, int nb_source, bool activated, int elapsed_seconds, int renormalization_delay) {
-    if (activated) {        
-        if (elapsed_seconds % renormalization_delay == 0) {     
-            cout << "renormalization " << endl ;
-            cout << "elapsed_seconds " + to_string(elapsed_seconds) << endl << endl;
-            if (neutrons_array.size() > nb_source) {
-                std::vector<Particle> neutron_batch_vector;                
-                for (int i = neutrons_array.size()-1; i >= (neutrons_array.size() - nb_source); --i) {
-                    neutrons_array[i].set_as_source(); 
-                    neutron_batch_vector.push_back(neutrons_array[i]);                    
-                }                
-                neutrons_array = neutron_batch_vector;
-            }       
-                      
-        }
-    }   
-}
-
 void NeutronSet::generate_new_batch(DataManager& dm) {
-    //neutrons_array.clear();
-    for (int j = 0; j < fissioned_neutrons_vector.size(); j++) {
-        Particle fissioned_neutron = Particle(fissioned_neutrons_vector[j].x, fissioned_neutrons_vector[j].y, 0, 0, r_neutron, mass_neutron, x_min, x_max, y_min, y_max);
-        fissioned_neutron.set_random_velocity(dm.neutron_speed_magnitude);
-        fissioned_neutron.set_as_source();
-        neutrons_array.push_back(fissioned_neutron);
+    cout << "generating a new batch of neutrons" << endl;
+    std::vector<Particle> fission_bank;
+    for (int i = 0; i < dm.nb_source; i++) {
+        if (neutrons_array[i].is_source && neutrons_array[i].last_reaction == fissioned){
+            fission_bank.push_back(neutrons_array[i]);
+        }
     }
-    fissioned_neutrons_vector.clear();
-
-    while (neutrons_array.size() < dm.nb_source) {
-        Particle fissioned_neutron = Particle(0, 0, 0, 0, r_neutron, mass_neutron, x_min, x_max, y_min, y_max);
-        fissioned_neutron.set_random_velocity(dm.neutron_speed_magnitude);
-        fissioned_neutron.set_random_position();
-        fissioned_neutron.set_as_source();
-        neutrons_array.push_back(fissioned_neutron);
-    }    
+    int fission_bank_size = fission_bank.size();
+    deactivate_neutrons_vector();
+    for (int i = 0; i < dm.nb_source; i++) {
+        neutrons_array[i].x = fission_bank[i%fission_bank_size].x;
+        neutrons_array[i].y = fission_bank[i%fission_bank_size].y;
+        neutrons_array[i].set_last_position();
+        neutrons_array[i].set_random_velocity(dm.neutron_speed_magnitude);
+        neutrons_array[i].set_as_source();
+        neutrons_array[i].is_alive = true;
+        neutrons_array[i].clock.restart();
+        nb_alive_neutrons++;  
+    }
 }
 
-
-void NeutronSet::compute_keff(DataManager& dm) {
-    if (nb_captured_neutrons + nb_fissioned_neutrons + nb_fled_neutrons != 0) {
-        keff = (float)(nb_fission)/(float)(nb_captured_neutrons + nb_fissioned_neutrons + nb_fled_neutrons);
-    }    
-}
 
 void NeutronSet::compute_averaged_keff() {
     if (batch_keff_vector.size() == 0) {
@@ -414,7 +383,7 @@ void NeutronSet::compute_sigma() {
     else {
         float variance = 0.0;
         for (int i = 0; i < n; i++) {
-            variance += (keff - averaged_keff) * (keff - averaged_keff);
+            variance += (keff_estimator_coll_fiss - averaged_keff) * (keff_estimator_coll_fiss - averaged_keff);
         }
         float n_float = (float)n;
         variance = variance / (n_float - 1);
@@ -429,5 +398,6 @@ void NeutronSet::reset_keff_counters() {
     nb_fissioned_neutrons = 0;
     nb_fled_neutrons = 0;
     nb_captured_neutrons = 0;
-    nb_fission = 0;
+    keff_estimator_coll_fiss = 0;
+
 }

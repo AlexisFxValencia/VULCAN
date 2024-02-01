@@ -2,7 +2,10 @@
 
 ContinuousManager::ContinuousManager(DataManager& dm) {
     scene_manager = SceneManager(dm); 
-    neutron_set = NeutronSet(dm);    
+    neutron_set = NeutronSet(dm);  
+    //cout << "dm.max_nb_neutrons = " << dm.max_nb_neutrons << endl;  
+    //cout << "neutron_set = " << neutron_set.neutrons_array.size() << endl;  
+
     geometry_creator = GeometryCreator(dm);
 
     control_rod = ControlRod(dm);
@@ -15,6 +18,7 @@ ContinuousManager::ContinuousManager(DataManager& dm) {
     Material vacuum = Material("void", sf::Color::Yellow, 1.0, 0, 0.0, 0.0, 0.0);
     dm.highest_volume_priority++;
     detector = Detector("detector", "disk", radius_detector, 0.0, x_detector, y_detector, vacuum, dm.highest_volume_priority);
+    
     
 
     window.create(sf::VideoMode(dm.x_window, dm.y_window), "VULCAN :  A Pedagogical Monte Carlo neutronics simulator");
@@ -173,19 +177,19 @@ void ContinuousManager::draw_walls(DataManager& dm) {
 }
 
 
-void ContinuousManager::generate_sources( DataManager& dm, int time, int delay, NeutronSet& neutron_set, GUICreator& gui_creator) {
+void ContinuousManager::generate_sources( DataManager& dm, int time, int delay, NeutronSet& neutron_set) {
     if (dm.automatic_generated_sources) {        
         if (time % delay == 0) {
-            neutron_set.add_source_neutrons(dm);
+            neutron_set.add_source_neutrons(dm); 
         }
     }
 }
 
 
 void ContinuousManager::write_keff(ofstream& myfile) {
-    string keff = to_string(neutron_set.keff);
+    string keff_estimator_coll_fiss = to_string(neutron_set.keff_estimator_coll_fiss);
     myfile.open("input_files/listing.ns", std::ios_base::app);//
-    myfile << keff << endl;
+    myfile << keff_estimator_coll_fiss << endl;
     myfile.close();
 }
 
@@ -227,11 +231,11 @@ void ContinuousManager::initialize_detector_graph(DataManager& dm) {
     float width_graph = 400.0;
     sf::Vector2f location = sf::Vector2f(width_graph / 6, dm.y_window - 1.4 * height_graph);
     detector_plot.setSize(sf::Vector2f(width_graph, height_graph));
-    detector_plot.setTitle("Intensité du détecteur de neutrons");
+    detector_plot.setTitle("Neutrons detector intensity");
     //plot_.setFont("./font.ttf");
     detector_plot.setFont("themes/arial.ttf");
-    detector_plot.setXLabel("temps (s)");
-    detector_plot.setYLabel("Intensité (neutrons/sec)");
+    detector_plot.setXLabel("time (sec)");
+    detector_plot.setYLabel("Intensity (neutrons/sec)");
     detector_plot.setBackgroundColor(sf::Color(255, 255, 255));
     detector_plot.setTitleColor(sf::Color::Black);
     detector_plot.setPosition(sf::Vector2f(location.x, location.y));
@@ -350,7 +354,6 @@ void ContinuousManager::continuous_main(DataManager& dm) {
     myfile << "Keff of the batches simulated:" << endl;
     myfile.close();
 
-
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -378,16 +381,17 @@ void ContinuousManager::continuous_main(DataManager& dm) {
             gui_creator.gui.handleEvent(event);
         }
 
-        
-
+       
         if (dm.reset_simulation && dm.display_detector_plot) {
             detector_index = dm.volu_array.size();
             dm.volu_array.push_back(detector);
             dm.reset_simulation = false;
         }
+        
 
 
         if (!gui_creator.gui_minimal.simulationPaused) {
+            
             neutron_set.check_delayed_neutrons_activation(dm);
 
             neutron_set.compute_neutron_lives(dm);
@@ -397,16 +401,15 @@ void ContinuousManager::continuous_main(DataManager& dm) {
             }
 
             int time = static_cast<int>(clock.getElapsedTime().asSeconds() * 20);
-            int renormalization_delay = dm.renormalization_delay * 20; // a traiter car pose pb avec le nouveau mode
-            neutron_set.renormalize(dm, dm.nb_source, true, time, renormalization_delay);
-            
+            //int renormalization_delay = dm.renormalization_delay * 20; // a traiter car pose pb avec le nouveau mode
+            //neutron_set.renormalize(dm, dm.nb_source, true, time, renormalization_delay);
 
             int source_delay = dm.add_source_delay * 20;
-            generate_sources(dm, time, source_delay, neutron_set, gui_creator);
+            generate_sources(dm, time, source_delay, neutron_set);
           
 
 
-            neutron_set.compute_keff(dm);
+            //neutron_set.compute_keff(dm);
             gui_creator.gui_minimal.update_nb_neutrons(dm, neutron_set, gui_creator.gui);
             if (dm.keff_panel_is_visible) {
                 gui_creator.gui_keff.update_keff(dm, neutron_set, gui_creator.gui);

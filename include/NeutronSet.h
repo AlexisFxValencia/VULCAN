@@ -15,6 +15,7 @@ using namespace std;
 #include <cmath>
 #include <omp.h>
 
+//enum reaction { unknown, fissioned, fled, captured, scattered };
 
 class NeutronSet {
 public:
@@ -29,12 +30,12 @@ public:
     int nb_neutrons_old;
     float previous_time;
     float ppcm;
-    float keff;
+    //float keff;
     float averaged_keff;
     float sigma; 
     std::vector<float> batch_keff_vector;
 
-    int nb_fission;
+    float keff_estimator_coll_fiss;
     int nb_fissioned_neutrons;
     int nb_fled_neutrons;
     int nb_captured_neutrons;

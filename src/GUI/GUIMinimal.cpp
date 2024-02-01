@@ -156,7 +156,7 @@ void GUIMinimal::update_nb_neutrons(DataManager& dm, NeutronSet& neutron_set, tg
     gui.get<tgui::Label>("nb_neutrons_label")->setText(to_string(neutron_set.get_nb_alive_neutrons()) + " neutrons actifs");
     
     /*
-    string keff = to_string(neutron_set.keff);
+    string keff = to_string(neutron_set.keff_estimator_coll_fiss);
     string rounded_keff = keff.substr(0, keff.find(".") + 3);
     gui.get<tgui::Label>("keff_label")->setText(dm.keff_label_text + rounded_keff);
     */

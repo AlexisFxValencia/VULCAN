@@ -9,6 +9,7 @@
 
 
 using namespace std;
+enum reaction { unknown, fissioned, fled, captured, scattered  };
 
 class Particle
 {
@@ -44,6 +45,9 @@ public:
 
     sf::Clock clock;
     sf::Clock clock_reactions;
+
+    
+    reaction last_reaction = unknown;
 
     Particle();
     Particle(float x, float y, float vx, float vy, float r, float mass, float x_min, float x_max, float y_min, float y_max);
