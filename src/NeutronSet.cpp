@@ -20,7 +20,7 @@ NeutronSet::NeutronSet(DataManager& dm) {
 
     update_wall_positions(dm);
     averaged_keff = 0;
-    sigma = 0.0;
+    sigma_keff = 0.0;
     counter = 0;
 
     nb_alive_neutrons = 0;
@@ -375,26 +375,19 @@ void NeutronSet::compute_averaged_keff() {
     }
     else {
         averaged_keff = std::accumulate(batch_keff_vector.begin(), batch_keff_vector.end(), 0.0) / batch_keff_vector.size();
+
     }
 
 }
 
 void NeutronSet::compute_sigma() {
-    int n = batch_keff_vector.size();
-    if (n == 0) {
-        sigma = 0.0;
-    }
-    else {
-        float variance = 0.0;
-        for (int i = 0; i < n; i++) {
-            variance += (keff_estimator_coll_fiss - averaged_keff) * (keff_estimator_coll_fiss - averaged_keff);
-        }
-        float n_float = (float)n;
-        variance = variance / (n_float - 1);
-
-        sigma = sqrt(variance / n_float);
-        sigma = sigma * 100000;
-    }
+    int n = batch_keff_vector.size();    
+    double accum = 0.0;
+    std::for_each (std::begin(batch_keff_vector), std::end(batch_keff_vector), [&](const double d) {
+        accum += (d - averaged_keff) * (d - averaged_keff);
+    });
+    double stdev = sqrt(accum / (n-1));
+    sigma_keff = 100000*stdev /sqrt(n);
 
 }
 

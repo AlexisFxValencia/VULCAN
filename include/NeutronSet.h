@@ -31,7 +31,7 @@ public:
     float previous_time;
     float ppcm;
     float averaged_keff;
-    float sigma; 
+    float sigma_keff; 
     std::vector<float> batch_keff_vector;
 
     float keff_estimator_coll_fiss;

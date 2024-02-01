@@ -111,9 +111,9 @@ void GUIKeff::create_averaged_keff_label(DataManager& dm, NeutronSet& neutron_se
 
 void GUIKeff::create_sigma_label(DataManager& dm, NeutronSet& neutron_set, tgui::Panel::Ptr panel) {
     auto sigma_label = tgui::Label::create();
-    string sigma = to_string(neutron_set.sigma);
-    string rounded_sigma = sigma.substr(0, sigma.find(".") + 3);
-    sigma_label->setText(dm.sigma_label_text + rounded_sigma);
+    string sigma_keff = to_string(neutron_set.sigma_keff);
+    string rounded_sigma_keff = sigma_keff.substr(0, sigma_keff.find(".") + 3);
+    sigma_label->setText(dm.sigma_label_text + rounded_sigma_keff);
     sigma_label->setPosition(x_widget, y_sigma);
     sigma_label->setTextSize(text_size_mini);
     sigma_label->getRenderer()->setTextColor(sf::Color::Green);
@@ -157,8 +157,8 @@ void GUIKeff::update_all(DataManager& dm, NeutronSet& neutron_set, tgui::GuiSFML
     string averaged_keff = to_string(neutron_set.averaged_keff);
     string rounded_averaged_keff = averaged_keff.substr(0, averaged_keff.find(".") + 3);
     gui.get<tgui::Label>("averaged_keff_label")->setText(dm.averaged_keff_label_text + rounded_averaged_keff);    
-    string sigma = to_string(neutron_set.sigma);
-    string rounded_sigma = sigma.substr(0, sigma.find(".") + 3);
-    gui.get<tgui::Label>("sigma_label")->setText(dm.sigma_label_text + rounded_sigma);
+    string sigma_keff = to_string(neutron_set.sigma_keff);
+    string rounded_sigma_keff = sigma_keff.substr(0, sigma_keff.find(".") + 3);
+    gui.get<tgui::Label>("sigma_label")->setText(dm.sigma_label_text + rounded_sigma_keff);
     gui.get<tgui::Label>("batch_label")->setText("batch number = " + to_string(1 + neutron_set.batch_keff_vector.size()));
 }

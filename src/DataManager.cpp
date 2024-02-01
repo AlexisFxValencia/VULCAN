@@ -787,7 +787,7 @@ void DataManager::assign_language() {
         keff_label_text = "Keff du batch en cours = ";
         last_keff_label_text = "Keff du dernier batch = ";
         averaged_keff_label_text = "Keff moyenne sur les batch calcules = ";
-        sigma_label_text = "Sigma (incertitude du Keff) : ";
+        sigma_label_text = "Sigma keff (pcm) : ";
         
     
     } else if (language == "english") {
@@ -825,7 +825,7 @@ void DataManager::assign_language() {
         keff_label_text = "Current batch Keff = ";
         last_keff_label_text = "Last batch Keff = ";
         averaged_keff_label_text = "Computed batches averaged Keff = ";
-        sigma_label_text = "Sigma (Keff uncertainty) = ";
+        sigma_label_text = "Sigma keff (pcm) = ";
 
     }
 }
