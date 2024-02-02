@@ -21,7 +21,7 @@ Dossier_pedagogique_neutronics_simulator.docx
 - git clone it
 - cd VULCAN
 
-dependencies : I could copy the source code of the dependency to be sure to have the good version
+dependencies : I copied the source code of the dependency for you to be sure to have the good version
 - unzip the lib/external libraries and compile them with cmake.
      - for SFML : mkdir build && cd build and cmake .. is enough
      - for TGUI : cmake -S . -B build -D TGUI_BACKEND=SFML_GRAPHICS -D TGUI_SHARED_LIBS=FALSE
