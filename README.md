@@ -2,13 +2,16 @@
 Pedagogical neutronics simulator with a primary focus on Criticality.
 
 # To use it on Windows
-Download and unzip the win64 release.
-execute VULCAN.exe
+Download on github the win64 release.
+
+Unzip it.
+
+Execute then  VULCAN.exe
 
 # To use it on Linux
 to be completed...
 
-#Compilation
+# Compilation
 ## Compilation for Linux
 - git clone it
 - cd VULCAN
