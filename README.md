@@ -17,7 +17,7 @@ back to vulcan :
 
 
 
-##Compilation for Windows
+## Compilation for Windows
 you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit.
 put them in the lib folder.
 replace the content of the CMakeLists by the content of CMakeLists_windows.
