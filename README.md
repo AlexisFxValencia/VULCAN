@@ -19,12 +19,11 @@ back to vulcan :
 
 ## Compilation for Windows
 you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit.
-put them in the lib folder.
-replace the content of the CMakeLists by the content of CMakeLists_windows.
-mkdir build && cd build
-cmake ..
-open the .sln file with visual studio (community 2022) and build a Release version. It should create a Release folder in the build folder.
-place the execut
-copy the content of the common folder ("input_files" and "themes") in build/Release
-copy the content of the bin folders of SFML and TGUI next to the executable (not with -d for the release version)
+- put them in the lib folder.
+- replace the content of the CMakeLists by the content of CMakeLists_windows.
+- mkdir build && cd build
+- cmake ..
+- open the .sln file with visual studio (community 2022) and build a Release version. It should create a Release folder in the build folder.
+- copy the content of the common folder ("input_files" and "themes") inthe build/Release folder
+- copy the content of the bin folders of SFML and TGUI next to the executable (not with -d for the release version)
 
