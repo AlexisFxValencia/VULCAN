@@ -17,7 +17,7 @@ There is no manual yet but a word file (in french) to help you use it for explan
 Dossier_pedagogique_neutronics_simulator.docx
 
 # Compilation
-## Compilation for Linux
+## Compilation on Linux
 - git clone it
 - cd VULCAN
 
@@ -32,18 +32,18 @@ back to vulcan :
 
 
 
-## Compilation for Windows
-you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit.
-- for example :
+## Compilation on Windows
+you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit. I could not copy them here for you because they are to big.
+- As for now (2024) the following links work :
      -  https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-64-bit.zip
      -  https://github.com/texus/TGUI/releases/download/v0.9.5/TGUI-0.9.5-VisualStudio-64bit-for-SFML-2.5.1.zip
-- put them in the lib folder and extract them there.
-- replace the content of the CMakeLists by the content of CMakeLists_windows.
+- put the downloaded zip files in the lib folder and extract them there.
+- replace the content of VULCAN CMakeLists by the content of CMakeLists_windows.
 - mkdir build && cd build
 - cmake ..
 - open build/VULCAN.sln with visual studio (community 2022) and build a Release version from it. It should create a Release folder in the build folder.
-- visual studio won't be able to launch the executable so you whould have an error message. Is is allright.
-- copy the content of the common folder ("input_files" and "themes") inthe build/Release folder
-- copy the content of the bin folders of SFML and TGUI next to the executable (not with -d for the release version)
+- Visual studio won't be able to launch the executable so you should have an error message. Is is allright.
+- copy the content of the common folder ("input_files" and "themes") in the build/Release folder
+- copy the content of the bin folders of SFML and TGUI (the .dll) next to the executable (without -d in their name is enough for a release version of the executable)
 - execute build/VULCAN.exe
 
