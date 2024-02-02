@@ -18,7 +18,7 @@ Dossier_pedagogique_neutronics_simulator.docx
 
 # Compilation
 ## Compilation on Linux
-- git clone it
+- git clone https://github.com/AlexisFxValencia/VULCAN.git
 - cd VULCAN
 
 dependencies : I copied the source code of the dependency for you to be sure to have the good version
@@ -33,6 +33,8 @@ back to vulcan :
 
 
 ## Compilation on Windows
+- git clone https://github.com/AlexisFxValencia/VULCAN.git
+
 you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit. I could not copy them here for you because they are to big.
 - As for now (2024) the following links work :
      -  https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-64-bit.zip
