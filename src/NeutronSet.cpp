@@ -348,6 +348,7 @@ void NeutronSet::update_wall_positions(DataManager& dm) {
 
 void NeutronSet::generate_new_batch(DataManager& dm) {
     cout << "generating a new batch of neutrons" << endl;
+    /*
     std::vector<Particle> fission_bank;
     for (int i = 0; i < dm.nb_source; i++) {
         if (neutrons_array[i].is_source && neutrons_array[i].last_reaction == fissioned){
@@ -359,6 +360,26 @@ void NeutronSet::generate_new_batch(DataManager& dm) {
     for (int i = 0; i < dm.nb_source; i++) {
         neutrons_array[i].x = fission_bank[i%fission_bank_size].x;
         neutrons_array[i].y = fission_bank[i%fission_bank_size].y;
+        neutrons_array[i].set_last_position();
+        neutrons_array[i].set_random_velocity(dm.neutron_speed_magnitude);
+        neutrons_array[i].set_as_source();
+        neutrons_array[i].is_alive = true;
+        neutrons_array[i].clock.restart();
+        nb_alive_neutrons++;  
+    }*/
+    std::vector<float> fission_bank_x;
+    std::vector<float> fission_bank_y;
+    for (int i = 0; i < dm.nb_source; i++) {
+        if (neutrons_array[i].is_source && neutrons_array[i].last_reaction == fissioned){
+            fission_bank_x.push_back(neutrons_array[i].x);
+            fission_bank_y.push_back(neutrons_array[i].y);
+        }
+    }
+    int n_fb = fission_bank_x.size();
+    deactivate_neutrons_vector();
+    for (int i = 0; i < dm.nb_source; i++) {
+        neutrons_array[i].x = fission_bank_x[i % n_fb];
+        neutrons_array[i].y = fission_bank_y[i % n_fb];
         neutrons_array[i].set_last_position();
         neutrons_array[i].set_random_velocity(dm.neutron_speed_magnitude);
         neutrons_array[i].set_as_source();

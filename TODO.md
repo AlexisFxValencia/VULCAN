@@ -2,6 +2,7 @@
 - le temps sécoule trop rapidement dans les graphiques
 - find_material doit retourner un objet si non trouvé ?
 - keff calculation : disable neutron creation already pushed.
+- problem fission bank when neutron creation enabled
 
 01/02/24 
 - keff computation corrected
