@@ -44,8 +44,8 @@ you need the compiled versions of SFML 2.5.1 and TGUI 0.9.5 for windows 64 bit. 
 - mkdir build && cd build
 - cmake ..
 - open build/VULCAN.sln with visual studio (community 2022) and build a Release version from it. It should create a Release folder in the build folder.
-- Visual studio won't be able to launch the executable so you should have an error message. Is is allright.
+- Visual studio won't be able to launch the executable unless you right click on VULCAN in the solution explorer and set it as the startup project (otherwise ALL_BUILD is the startup project...)
 - copy the content of the common folder ("input_files" and "themes") in the build/Release folder
 - copy the content of the bin folders of SFML and TGUI (the .dll) next to the executable (without -d in their name is enough for a release version of the executable)
-- execute build/VULCAN.exe
+- execute build/VULCAN.exe in a terminal or click on play in visual studio.
 
