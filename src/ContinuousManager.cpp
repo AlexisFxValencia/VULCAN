@@ -279,7 +279,6 @@ void ContinuousManager::update_graphics(DataManager& dm, int time_ms) {
             detector.param2 = dm.volu_array[detector_index].param2;
             detector.detects(neutron_set);
 
-            cout << "toto" << endl;
             if ((time_ms - time_memorized_2) > detector.detection_period) {
                 time_memorized_2 = time_ms;
                 detector.update_intensity(neutron_set);
