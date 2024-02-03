@@ -32,7 +32,7 @@ public:
     sf::plot::Plot detector_plot;
     int detector_index = -1;
     int time_memorized_1;
-    int time_memorized_2;
+    int time_memorized_2 = 0;
 
 	ContinuousManager(DataManager& dm);
     void draw_neutrons(DataManager& dm);
