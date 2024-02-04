@@ -3,14 +3,17 @@ Pedagogical neutronics simulator with a primary focus on Criticality.
 ![image](https://github.com/AlexisFxValencia/VULCAN/assets/84465552/96ce3cb3-a13e-45e3-b849-450883b0d2ed)
 
 # To use it on Windows
-Download on github the win64 release.
+Download on github the latest win64 release.
 
 Unzip it.
 
 Execute then  VULCAN.exe
 
 # To use it on Linux
-cf. Compilation on Linux
+- Download on github the lastest lin64 release
+- copy the archive in a VULCAN folder and cd there.
+- tar -xvf "name of the release"
+- ./VULCAN
 
 # Manual
 There is no manual yet but a word file (in french) to help you use it for explaning neutronics and criticality to your students or the public : 
