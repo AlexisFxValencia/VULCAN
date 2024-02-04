@@ -10,25 +10,22 @@ Unzip it.
 Execute then  VULCAN.exe
 
 # To use it on Linux
-to be completed...
+cf. Compilation on Linux
 
 # Manual
 There is no manual yet but a word file (in french) to help you use it for explaning neutronics and criticality to your students or the public : 
 Dossier_pedagogique_neutronics_simulator.docx
 
 # Compilation
-## Compilation on Linux
+## Compilation (and run) on Linux
 - git clone https://github.com/AlexisFxValencia/VULCAN.git
 - cd VULCAN
+- ./build_and_run.sh
+It should unzip the dependencies in the lib folder, compile VULCAN and run it.
 
-dependencies : I copied the source code of the dependency for you to be sure to have the good version
-- unzip the lib/external libraries and compile them with cmake.
-     - for SFML : mkdir build && cd build and cmake .. is enough
-     - for TGUI : cmake -S . -B build -D TGUI_BACKEND=SFML_GRAPHICS -D TGUI_SHARED_LIBS=FALSE
-
-back to vulcan :
-- mkdir build && cd build
-- cmake ..
+### Debug with VScode
+- ./build_and_run.sh -d
+- there is a launch.json already written in the folder with a debug configuration.
 
 
 
