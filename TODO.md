@@ -8,6 +8,7 @@
 04/02/24 : 
 - added a script to compile and launch the project in release and debug mode
 - added a launch.json configuration for vscode
+- added the ability to automatically unzip the SFML and TGUI dependencies before compilation.
 
 01/02/24 
 - keff computation corrected

@@ -8,6 +8,8 @@ display_help() {
   exit 0
 }
 
+chmod +x extract_libs.sh
+source ./extract_libs.sh
 
 # Par défaut, le mode de compilation est Release
 build_mode="Release"
