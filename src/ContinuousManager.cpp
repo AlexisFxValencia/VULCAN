@@ -3,9 +3,6 @@
 ContinuousManager::ContinuousManager(DataManager& dm) {
     scene_manager = SceneManager(dm); 
     neutron_set = NeutronSet(dm);  
-    //cout << "dm.max_nb_neutrons = " << dm.max_nb_neutrons << endl;  
-    //cout << "neutron_set = " << neutron_set.neutrons_array.size() << endl;  
-
     geometry_creator = GeometryCreator(dm);
 
     control_rod = ControlRod(dm);
