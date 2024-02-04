@@ -4,6 +4,10 @@
 - keff calculation : disable neutron creation already pushed.
 - problem fission bank when neutron creation enabled
 
+
+04/02/24 : 
+- added a script to compile and launch the project in release and debug mode
+
 01/02/24 
 - keff computation corrected
 - keff_estimator_coll_tot added

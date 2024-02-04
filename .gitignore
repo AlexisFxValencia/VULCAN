@@ -1,3 +1,6 @@
 build/
 lib/SFML-2.5.1-linux-gcc-64-bit
 lib/TGUI-0.9.5
+Release
+Debug
+*.swp
