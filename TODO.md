@@ -7,6 +7,7 @@
 
 04/02/24 : 
 - added a script to compile and launch the project in release and debug mode
+- added a launch.json configuration for vscode
 
 01/02/24 
 - keff computation corrected
