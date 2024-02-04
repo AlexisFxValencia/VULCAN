@@ -5,23 +5,28 @@ display_help() {
   echo "Options:"
   echo "  -d    Compile in Debug mode (default: Release)"
   echo "  -h    Display this help"
+  echo "  -c    only compilation (doesn't run the program in the end)"
   exit 0
 }
 
 chmod +x extract_libs.sh
 source ./extract_libs.sh
 
+compile_only="false"
 # Par défaut, le mode de compilation est Release
 build_mode="Release"
 
 # Vérifier si l'argument -d est passé
-while getopts ":dh" opt; do
+while getopts ":dhc" opt; do
   case $opt in
     d)
       build_mode="Debug"
       ;;
     h)
       display_help
+      ;;
+    c)
+      compile_only="true"
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -41,5 +46,8 @@ cmake -DCMAKE_BUILD_TYPE=$build_mode ..
 make
 cp -r ../common/input_files .
 cp -r ../common/themes .
-./VULCAN
+if [ "$compile_only" = "false" ]; then
+ ./VULCAN
+fi
+
 
