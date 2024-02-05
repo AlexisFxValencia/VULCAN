@@ -1,14 +1,6 @@
 #include "Particle.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <iostream>
-#include "Volume.h"
-
-#include <math.h>
-//#include <corecrt_math_defines.h>
-# define M_PI           3.14159265358979323846
+const double PI = std::acos(-1.0);
 
 Particle::Particle() {
     x = 0.0;
@@ -110,7 +102,7 @@ void Particle::set_random_position() {
 
 void Particle::set_random_velocity(float speed_magnitude) {    
     float alea = (float)rand() / RAND_MAX;
-    this-> theta = alea * 2 * M_PI;
+    this-> theta = alea * 2 * PI;
     vx = speed_magnitude * cos(theta);
     vy = speed_magnitude * sin(theta);
     velocity = speed_magnitude;

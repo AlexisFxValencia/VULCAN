@@ -4,7 +4,11 @@
 
 #include <string>
 #include <SFML/Graphics.hpp>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <iostream>
+#include <math.h>
 
 
 
@@ -64,11 +68,8 @@ public:
     void cyclical_reflexion();
     void set_random_position();
     void set_random_velocity(float speed_magnitude);
-
-
     void compute_velocity();
-
-    
+   
 };
 
 #endif // PARTICLE_H

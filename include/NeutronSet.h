@@ -9,7 +9,7 @@ using namespace std;
 #include "Material.h"
 #include "GeometryCreator.h"
 #include "DataManager.h"
-#include <TGUI/TGUI.hpp>
+
 
 #include <numeric>
 #include <cmath>
