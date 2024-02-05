@@ -2,9 +2,8 @@
 #include <string>
 #include "Particle.h"
 #include "Material.h"
-
-
-using namespace std;
+#include <math.h>
+#include <iostream>
 
 class Volume {
 public:
