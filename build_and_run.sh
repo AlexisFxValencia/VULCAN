@@ -9,9 +9,6 @@ display_help() {
   exit 0
 }
 
-chmod +x extract_libs.sh
-source ./extract_libs.sh
-
 compile_only="false"
 # Par défaut, le mode de compilation est Release
 build_mode="Release"
@@ -34,6 +31,11 @@ while getopts ":dhc" opt; do
       ;;
   esac
 done
+
+file_path=$(readlink -f "$0")
+ROOT_DIR=$(dirname "$file_path")
+echo $ROOT_DIR
+export SFML_DIR="$ROOT_DIR/lib/SFML-2.5.1-linux-gcc-64-bit/SFML-2.5.1/"
 
 # Créer le répertoire de build en fonction du mode choisi
 mkdir -p "$build_mode"

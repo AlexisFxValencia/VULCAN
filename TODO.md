@@ -8,6 +8,10 @@
 - problème dépendances : SFML est donné par librairie .so (binaire). TGUI a été recompilé. Il faudrait qu'il n'y ait que les sources et qu'on les recompile automatiquement.
 - pb de scène dont la largeur ne va pas jusqu'au menu.
 
+07/02/24 : 
+- automatic compilation of tgui from its source code instead of giving the built library.
+
+
 04/02/24 : 
 - added a script to compile and launch the project in release and debug mode
 - added a launch.json configuration for vscode
