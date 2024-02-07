@@ -5,7 +5,6 @@
 - problem fission bank when neutron creation enabled
 - decentering a t'il besoin d'un vecteur SFML ? Peut-être ce serait mieux que je créée ma propre classe de vecteur pour éviter la dépendance des classes de bas niveau.
 - éviter la dépendance de Particle avec SFML clock
-- problème dépendances : SFML est donné par librairie .so (binaire). TGUI a été recompilé. Il faudrait qu'il n'y ait que les sources et qu'on les recompile automatiquement.
 - pb de scène dont la largeur ne va pas jusqu'au menu.
 
 07/02/24 : 
